@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        repository: Leon_Project-main/Leon_Project-main
+        path: Leon_Project-main/Leon_Project-main
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
