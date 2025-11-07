@@ -201,7 +201,7 @@ check_prerequisites() {
     print_info "Checking prerequisites..."
     
     # Check if required files exist
-    local required_files=("Dockerfile" "docker-compose.yml" "app.py" "requirements.txt" "nginx.conf" "gunicorn_config.py")
+    local required_files=("Dockerfile" "docker-compose.yml" "src/app.py" "requirements.txt" "nginx.conf" "gunicorn_config.py")
     local missing_files=()
     
     for file in "${required_files[@]}"; do

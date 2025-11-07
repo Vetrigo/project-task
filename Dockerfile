@@ -19,12 +19,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY app.py .
+COPY src/app.py .
 COPY gunicorn_config.py .
 
 # Copy templates and static files
-COPY templates/ ./templates/
-COPY static/ ./static/
+COPY src/templates/ ./templates/
+COPY src/static/ ./static/
 
 # Create a non-root user to run the application
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
