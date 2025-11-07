@@ -163,26 +163,36 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
   release:
-      name: Create Release
-      runs-on: ubuntu-latest
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs:
+      - create-image
 
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: my-artifact
 
-      needs:
-        - create-image
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Automatically generated release notes for ${{ github.ref }}.
+            See the changelog for details.
+          draft: false
+          prerelease: false
 
-      steps:
-        - uses: actions/download-artifact@v5
-          with:
-            name: my-artifact
-        - name: Checkout code
-          uses: actions/checkout@v4
-        - name: Create Release
-          id: create_release
-          uses: comnoco/create-release@v2
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-          with:
-            tag_name: ${{ github.ref }}
-            release_name: Release ${{ github.ref }}
-            draft: false
-            prerelease: false
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./my-app.zip
+          asset_name: my-app-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
