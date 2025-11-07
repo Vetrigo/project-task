@@ -231,26 +231,25 @@ The main application file contains three routes:
 ## 📁 Project Structure
 
 ```
-Leon_Project_2/
-├── app.py                 # Main Flask application
+/
+├── .github
+│   └── workflows
+│       └── docker-publish.yml
+├── src
+│   ├── templates/
+│   │   └── index.html         # HTML template for calculator UI
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── styles.css     # Stylesheet for calculator UI
+│   │   └── js/
+│   │        └── calculator.js  # JavaScript for calculator logic
+│   └── app.py                 # Main Flask application 
 ├── gunicorn_config.py      # Gunicorn server configuration
 ├── requirements.txt        # Python dependencies
 ├── Dockerfile             # Docker image definition for Flask app
 ├── docker-compose.yml      # Docker Compose orchestration
 ├── nginx.conf             # Nginx reverse proxy configuration
 ├── install.sh             # Interactive installation script
-├── .dockerignore          # Files to exclude from Docker build
-├── .flake8                # Python linting configuration
-├── .pylintrc              # Pylint configuration
-├── .yamllint              # YAML linting configuration
-├── .hadolint.yaml         # Dockerfile linting configuration
-├── templates/
-│   └── index.html         # HTML template for calculator UI
-└── static/
-    ├── css/
-    │   └── styles.css     # Stylesheet for calculator UI
-    └── js/
-        └── calculator.js  # JavaScript for calculator logic
 ```
 
 ### File Descriptions
