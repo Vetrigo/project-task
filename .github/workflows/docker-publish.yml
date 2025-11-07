@@ -133,7 +133,7 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: 'Vetrigo/project-task:latest' # ${{ steps.meta.outputs.tags }}
+          tags: 'ghcr.io/Vetrigo/project-task:latest' # ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -146,7 +146,7 @@ jobs:
       - name: Sign the published Docker image
         env:
           # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
-          TAGS: 'Vetrigo/project-task:latest' # ${{ steps.meta.outputs.tags }}
+          TAGS: 'ghcr.io/Vetrigo/project-task:latest' # ${{ steps.meta.outputs.tags }}
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
