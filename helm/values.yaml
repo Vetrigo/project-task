@@ -1,6 +1,8 @@
 deploy:
   image: ghcr.io/vetrigo/project-task:latest
   port: 8000
+  cpu: "100m"
+  memory: "128Mi"
 
 hpa:
   maxReplica: 10

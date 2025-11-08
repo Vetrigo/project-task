@@ -20,3 +20,7 @@ spec:
         image:  {{ .Values.deploy.image }}
         ports:
         - containerPort: {{ .Values.deploy.port }}
+        resources:
+          requests:
+            cpu: {{ .Values.deploy.cpu }}
+            memory: {{ .Values.deploy.memory }}
