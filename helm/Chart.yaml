@@ -1,0 +1,13 @@
+apiVersion: v2
+name: myapp
+version: 0.1.0
+appVersion: "1.16.0"
+description: A Helm chart for my application
+type: application
+keywords:
+  - myapp
+  - web
+  - application
+  - calculator
+sources:
+  - https://github.com/Vetrigo/project-task
