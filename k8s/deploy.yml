@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-task-deployment
+  labels:
+    app: project-task-app
+spec:
+  selector:
+    matchLabels:
+      app: project-task
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: project-task
+    spec:
+      containers:
+      - name: project-task-web
+        image: ghcr.io/vetrigo/project-task:latest
+        ports:
+        - containerPort: 8000

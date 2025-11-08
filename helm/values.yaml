@@ -1,0 +1,16 @@
+deploy:
+  image: ghcr.io/vetrigo/project-task:latest
+  port: 8000
+
+hpa:
+  maxReplica: 10
+  minReplica: 3
+  metricCpu: 70
+  metricMemory: 80
+  metricPodPpc: 1k
+
+service:
+  protocol: TCP
+  externalPort: 80
+  internalPort: 8000
+
