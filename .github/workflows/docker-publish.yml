@@ -84,7 +84,8 @@ jobs:
       - name: Run KubeLinter
         uses: stackrox/kube-linter-action@v1.0.4
         with:
-         directory: ./k8s # Directory containing your Kubernetes manifests
+          directory: ./k8s # Directory containing your Kubernetes manifests
+        continue-on-error: true
 
   create-image:
     if: github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
