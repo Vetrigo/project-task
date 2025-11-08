@@ -504,6 +504,40 @@ curl -X POST http://localhost/calculate \
 curl http://localhost/health
 ```
 
+##  GitHub action
+
+On push and merge request except branch main
+    - Build image from **Dockerfile** to validate Dockerfile
+    - run **Python lint** for 5 latest versions 3.10 - 3.14
+    - run **Helm lint** for helm yamls files
+    - run **K8s lint** for k8s yamls files
+On push to main
+    - Make all previous steps
+    - Create a new image and save it with tag "latest"
+On new tag/release
+    - Make all previous steps
+    - Add to image a new tag 
+
+###   K8S
+
+There a 3 k8s files
+    - **deploy.yml** Use latest image for deployment
+    - **service.yml** Create ClusterIP service and forward port 80:8000
+    - **hpa.yml** Load balancer for pods with minimum 3 and maximum 10 pods. Metrics cpu, memory, pod packets per seconds
+
+To create app on kubernetis cluster run:
+    - kubectl apply -f deploy.yml
+    - kubectl apply -f service.yml
+    - kubectl apply -f hpa.yml
+
+
+### Helm
+
+Helm for automation and templating:
+You can update variable in file helm/values.yaml
+Command to run:
+    - helm install <app name> helm/ ( helm install my-app helm/ )
+
 ## 🛡️ Security Considerations
 
 - **Input Validation**: All expressions are validated before evaluation
