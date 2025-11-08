@@ -82,7 +82,7 @@ jobs:
         run: helm lint ./helm # Replace with the actual path to your chart
 
       - name: Run KubeLinter
-        uses: stackrox/kube-linter-action@v2
+        uses: stackrox/kube-linter-action@v1.0.4
         with:
          directory: ./k8s # Directory containing your Kubernetes manifests
 
