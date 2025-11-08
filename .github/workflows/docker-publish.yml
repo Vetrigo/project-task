@@ -69,9 +69,19 @@ jobs:
   test-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - name: yaml-lint
-        uses: ibiqlik/action-yamllint@v3
+#      - uses: actions/checkout@v5
+#      - name: yaml-lint
+#        uses: ibiqlik/action-yamllint@v3
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.17.0 # Specify your desired Helm version
+
+      - name: Run Helm Lint
+        run: helm lint ./helm # Replace with the actual path to your chart
 
   create-image:
     if: github.event_name != 'pull_request' && ( github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
